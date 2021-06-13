@@ -1,6 +1,7 @@
 
 import { ValidationError } from 'joi';
 import { DEBUG_MODE } from '../config/index.js';
+import CustomErrorHandler from '../Services/CustomErrorHandler.js';
 
 const errorHandler = (err, req, res, next) => {
     let statusCode = 500;
@@ -16,7 +17,13 @@ const errorHandler = (err, req, res, next) => {
             message: err.message
         }
     }
+    if( err instanceof CustomErrorHandler){
+        statusCode = err.status;
+        data = {
+            message: err.message
+        }
 
+    }
     return res.status(statusCode).json(data);
 
 

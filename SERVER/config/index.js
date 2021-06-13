@@ -4,6 +4,8 @@
  export const {
 
     APP_PORT,
-    DEBUG_MODE
+    DEBUG_MODE,
+    DB_URL,
+    JWR_SECRET
     
  } = process.env;
