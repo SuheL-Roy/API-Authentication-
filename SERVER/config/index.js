@@ -6,6 +6,9 @@
     APP_PORT,
     DEBUG_MODE,
     DB_URL,
-    JWR_SECRET
+    JWR_SECRET,
+    REFRESH_SECRET,
+    APP_URL
+    
     
  } = process.env;

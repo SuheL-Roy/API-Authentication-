@@ -4,9 +4,11 @@ import { APP_PORT , DB_URL } from './config/index.js';
 import routes from './Routes/index.js';
 import errorHandler from './middlewares/errorHandeling.js'
 import  mongoose  from 'mongoose';
+import path  from 'path';
 
 const app = express();
-app.use(express.json());
+
+
 
 mongoose.connect(DB_URL,{
     useNewUrlParser: true,
@@ -23,10 +25,11 @@ db.once('open', () => {
 
 
 
-
+global.appRoot = path.resolve(__dirname);
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 app.use('/api', routes);
-
-
+app.use('/uploads', express.static('uploads'));
 app.use(errorHandler);
 
 app.listen(APP_PORT , () => console.log(`listening on port ${APP_PORT}`));
